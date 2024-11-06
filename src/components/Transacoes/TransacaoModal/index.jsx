@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CampoTexto from "@components/CampoTexto";
 import Fieldset from "@components/Fieldset";
 import Form from "@components/Form";
@@ -6,8 +6,11 @@ import { MoneyIcon } from "@components/Icones";
 import Label from "@components/Label";
 import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
+import { observer } from "mobx-react";
+import { StoreContext } from "src/mobx/store/storeContext";
 
-const TransacaoModal = ({ isOpen, onCloseModal }) => {
+const TransacaoModal = observer(({ isOpen, onCloseModal }) => {
+  const { transactionStore } = useContext(StoreContext);
   const [novaTransacao, setNovaTransacao] = useState({
     nome: "",
     valor: 0,
@@ -17,6 +20,7 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
   });
 
   const aoSubmeterFormModal = () => {
+    transactionStore.adicionarTransacao(novaTransacao);
     onCloseModal();
   };
 
@@ -106,6 +110,6 @@ const TransacaoModal = ({ isOpen, onCloseModal }) => {
       </Form>
     </Modal>
   );
-};
+});
 
 export default TransacaoModal;
