@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Section,
   Container,
@@ -15,9 +15,12 @@ import { RadioGroup, RadioInput } from "@components/BotaoRadio";
 import Form from "@components/Form/Form";
 import ilustracao from "@assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react";
+import { StoreContext } from "src/mobx/store/storeContext.jsx";
 
-const Cadastro = () => {
+const Cadastro = observer(() => {
   const navigate = useNavigate();
+  const { userStore } = useContext(StoreContext);
 
   const [nome, setNome] = useState("");
   const [renda, setRenda] = useState("");
@@ -25,6 +28,7 @@ const Cadastro = () => {
 
   const aoSubmeterFormulario = (evento) => {
     evento.preventDefault();
+    userStore.definirDadosUsuario({ nome, renda, objetivoFinanceiro });
     navigate("/home");
   };
 
@@ -107,6 +111,6 @@ const Cadastro = () => {
       </SectionWrapper>
     </Section>
   );
-};
+});
 
 export default Cadastro;
