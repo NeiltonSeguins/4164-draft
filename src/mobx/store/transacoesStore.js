@@ -11,16 +11,15 @@ class TransactionStore {
     this.transacoes.push(transacao);
   }
 
-  get despesasCategorizadas() {
-    return this.transacoes.reduce((categorias, transacao) => {
-      if (transacao.tipo === "despesa") {
-        if (!categorias[transacao.categoria]) {
-          categorias[transacao.categoria] = 0;
-        }
-        categorias[transacao.categoria] += transacao.valor;
-      }
-      return categorias;
-    }, {});
+  get gastosPorCategoria() {
+    return this.transacoes
+      .filter((transacao) => transacao.tipo === "despesa")
+      .reduce((valorAcumulado, transacao) => {
+        valorAcumulado[transacao.categoria] =
+          (valorAcumulado[transacao.categoria] || 0) +
+          parseFloat(transacao.valor);
+        return valorAcumulado;
+      }, {});
   }
 }
 
