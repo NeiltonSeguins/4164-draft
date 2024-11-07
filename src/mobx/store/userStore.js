@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, autorun } from "mobx";
 
 class UserStore {
   nome = "";
@@ -8,6 +8,17 @@ class UserStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.carregarDoLocalStorage();
+
+    autorun(() => {
+      const userState = {
+        nome: this.nome,
+        renda: this.renda,
+        objetivoFinanceiro: this.objetivoFinanceiro,
+        orcamentoDiario: this.orcamentoDiario,
+      };
+      localStorage.setItem("usuario", JSON.stringify(userState));
+    });
   }
 
   definirDadosUsuario({ nome, renda, objetivoFinanceiro }) {
@@ -51,6 +62,18 @@ class UserStore {
     }
 
     return meta ? ((this.orcamentoDiario / meta) * 100).toFixed(2) : 0;
+  }
+
+  carregarDoLocalStorage() {
+    const dados = localStorage.getItem("usuario");
+    if (dados) {
+      const { nome, renda, objetivoFinanceiro, orcamentoDiario } =
+        JSON.parse(dados);
+      this.nome = nome;
+      this.renda = renda;
+      this.objetivoFinanceiro = objetivoFinanceiro;
+      this.orcamentoDiario = orcamentoDiario;
+    }
   }
 }
 

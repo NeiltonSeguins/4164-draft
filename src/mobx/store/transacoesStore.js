@@ -1,10 +1,22 @@
-import { makeAutoObservable } from "mobx";
+import { autorun, makeAutoObservable } from "mobx";
 
 class TransactionStore {
   transacoes = [];
 
   constructor() {
     makeAutoObservable(this);
+    this.carregarDoLocalStorage();
+
+    autorun(() => {
+      localStorage.setItem("transacoes", JSON.stringify(this.transacoes));
+    });
+  }
+
+  carregarDoLocalStorage() {
+    const dados = localStorage.getItem("transacoes");
+    if (dados) {
+      this.transacoes = JSON.parse(dados);
+    }
   }
 
   adicionarTransacao(transacao) {
