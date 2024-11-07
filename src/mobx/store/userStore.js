@@ -21,6 +21,16 @@ class UserStore {
     this.orcamentoDiario = Math.floor(this.renda / 30);
   }
 
+  atualizarOrcamento(transacao) {
+    let valor = Math.abs(transacao.valor);
+
+    if (transacao.tipo !== "receita") {
+      valor = -valor;
+    }
+
+    this.orcamentoDiario += parseFloat(valor);
+  }
+
   get progressoMeta() {
     const metas = {
       economizar: this.renda * 0.2,
