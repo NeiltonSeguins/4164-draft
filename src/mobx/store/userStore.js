@@ -31,6 +31,10 @@ class UserStore {
     this.orcamentoDiario += parseFloat(valor);
   }
 
+  atualizarOrcamentoComSaldo(saldo) {
+    this.orcamentoDiario += parseFloat(saldo);
+  }
+
   get progressoMeta() {
     const metas = {
       economizar: this.renda * 0.2,

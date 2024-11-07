@@ -8,12 +8,6 @@ import Contas from "@components/Contas/Contas";
 import BalancoFinanceiro from "@components/BalancoFinanceiro";
 import { Container, Movimentacoes, Orcamento } from "./style";
 
-const contas = [
-  { id: 1, banco: "Anybank", saldo: 1500 },
-  { id: 2, banco: "Bytebank", saldo: 2500 },
-  { id: 3, banco: "Swiftbank", saldo: 3200 },
-];
-
 function Home() {
   return (
     <Container>
@@ -26,7 +20,7 @@ function Home() {
       </Orcamento>
       <Movimentacoes>
         <Transacoes />
-        <Contas contas={contas} />
+        <Contas />
       </Movimentacoes>
       <BalancoFinanceiro />
     </Container>
