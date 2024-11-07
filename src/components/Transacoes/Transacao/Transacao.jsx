@@ -36,15 +36,26 @@ export const SaldoTransacao = styled.div`
   }
 `;
 
+const formatador = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+  minimumFractionDigits: 2,
+});
+
+const formataData = (data) => {
+  const [ano, mes, dia] = data.split("-");
+  return `${dia}/${mes}/${ano}`;
+};
+
 const Transacao = ({ transacao }) => {
   return (
     <ItemTransacao>
       <TituloTransacao $tipo={transacao.tipo}>
         <h3>{transacao.nome}</h3>
-        <span>{transacao.valor}</span>
+        <span>{formatador.format(transacao.valor)}</span>
       </TituloTransacao>
       <SaldoTransacao>
-        <p>{transacao.data}</p>
+        <p>{formataData(transacao.data)}</p>
       </SaldoTransacao>
     </ItemTransacao>
   );

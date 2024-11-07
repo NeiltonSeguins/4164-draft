@@ -32,12 +32,18 @@ export const SaldoConta = styled.div`
   }
 `;
 
+const formatador = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+  minimumFractionDigits: 2,
+});
+
 const Conta = ({ conta }) => {
   return (
     <ItemConta>
       <TituloConta>
         <BankIcon />
-        <h3>{conta.banco}</h3>
+        <h3>{formatador.format(conta.banco)}</h3>
       </TituloConta>
       <SaldoConta>
         <p>Saldo</p>

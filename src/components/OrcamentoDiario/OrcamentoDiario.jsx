@@ -6,6 +6,12 @@ import { observer } from "mobx-react";
 import { useContext } from "react";
 import { StoreContext } from "src/mobx/store/storeContext";
 
+const formatador = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+  minimumFractionDigits: 2,
+});
+
 const OrcamentoDiario = observer(() => {
   const { userStore } = useContext(StoreContext);
   const orcamentoDiario = userStore.orcamentoDiario;
@@ -14,7 +20,7 @@ const OrcamentoDiario = observer(() => {
     <Cartao>
       <CartaoCabecalho>Orçamento diário disponível</CartaoCabecalho>
       <CartaoCorpo>
-        <Descricao>{orcamentoDiario}</Descricao>
+        <Descricao>{formatador.format(orcamentoDiario)}</Descricao>
       </CartaoCorpo>
     </Cartao>
   );
