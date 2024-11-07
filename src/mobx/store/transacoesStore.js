@@ -1,4 +1,5 @@
 import { autorun, makeAutoObservable } from "mobx";
+import { v4 as uuidv4 } from "uuid";
 
 class TransactionStore {
   transacoes = [];
@@ -20,7 +21,7 @@ class TransactionStore {
   }
 
   adicionarTransacao(transacao) {
-    this.transacoes.push(transacao);
+    this.transacoes.push({ id: uuidv4(), ...transacao });
   }
 
   get gastosPorCategoria() {

@@ -43,11 +43,11 @@ const Conta = ({ conta }) => {
     <ItemConta>
       <TituloConta>
         <BankIcon />
-        <h3>{formatador.format(conta.banco)}</h3>
+        <h3>{conta.banco}</h3>
       </TituloConta>
       <SaldoConta>
         <p>Saldo</p>
-        <span>{conta.saldo}</span>
+        <span>{formatador.format(conta.saldo)}</span>
       </SaldoConta>
     </ItemConta>
   );
