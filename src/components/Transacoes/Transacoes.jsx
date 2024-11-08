@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 import { StoreContext } from "src/mobx/store/storeContext";
 
 const Transacoes = observer(() => {
-  const { transactionStore } = useContext(StoreContext);
+  const { transacoesStore } = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -25,7 +25,7 @@ const Transacoes = observer(() => {
       <CartaoCabecalho>Movimentação financeira</CartaoCabecalho>
       <Container>
         <ListaMovimentacoes>
-          {transactionStore.transacoes.map((transacao) => (
+          {transacoesStore.transacoes.map((transacao) => (
             <Transacao key={transacao.id} transacao={transacao} />
           ))}
         </ListaMovimentacoes>

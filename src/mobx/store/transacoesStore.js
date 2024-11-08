@@ -1,7 +1,7 @@
 import { autorun, makeAutoObservable } from "mobx";
 import { v4 as uuidv4 } from "uuid";
 
-class TransactionStore {
+class TransacoesStore {
   transacoes = [];
 
   constructor() {
@@ -36,4 +36,4 @@ class TransactionStore {
   }
 }
 
-export const transactionStore = new TransactionStore();
+export const transacoesStore = new TransacoesStore();

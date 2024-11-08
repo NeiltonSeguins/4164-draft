@@ -39,7 +39,7 @@ export const ListaMovimentacoes = styled.ul`
 `;
 
 const Contas = observer(() => {
-  const { contasStore, userStore } = useContext(StoreContext);
+  const { contasStore, usuarioStore } = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [novaConta, setNovaConta] = useState({
     banco: "",
@@ -56,7 +56,7 @@ const Contas = observer(() => {
 
   const aoAdicionarConta = () => {
     contasStore.adicionarConta(novaConta);
-    userStore.atualizarOrcamentoComSaldo(novaConta.saldo);
+    usuarioStore.atualizarOrcamentoComSaldo(novaConta.saldo);
     handleCloseModal();
   };
 

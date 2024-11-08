@@ -32,8 +32,8 @@ export const AreaChart = styled.div`
 `;
 
 const BalancoFinanceiro = observer(() => {
-  const { transactionStore } = useContext(StoreContext);
-  const categoriasAgrupada = transactionStore.gastosPorCategoria;
+  const { transacoesStore } = useContext(StoreContext);
+  const categoriasAgrupada = transacoesStore.gastosPorCategoria;
   const data = {
     labels: Object.keys(categoriasAgrupada),
     datasets: [

@@ -1,6 +1,6 @@
 import { makeAutoObservable, autorun } from "mobx";
 
-class UserStore {
+class UsuarioStore {
   nome = "";
   renda = 0;
   objetivoFinanceiro = "";
@@ -65,12 +65,10 @@ class UserStore {
     const meta = metas[this.objetivoFinanceiro] || 0;
 
     if (this.objetivoFinanceiro === "controlar-gastos") {
-      return meta
-        ? (((meta - this.orcamentoDiario) / meta) * 100).toFixed(2)
-        : 0;
+      return meta ? ((meta - this.orcamentoDiario) / meta) * 100 : 0;
     }
 
-    return meta ? ((this.orcamentoDiario / meta) * 100).toFixed(2) : 0;
+    return meta ? (this.orcamentoDiario / meta) * 100 : 0;
   }
 
   carregarDoLocalStorage() {
@@ -86,4 +84,4 @@ class UserStore {
   }
 }
 
-export const userStore = new UserStore();
+export const usuarioStore = new UsuarioStore();

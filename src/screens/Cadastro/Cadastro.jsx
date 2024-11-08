@@ -20,7 +20,7 @@ import { StoreContext } from "src/mobx/store/storeContext.jsx";
 
 const Cadastro = observer(() => {
   const navigate = useNavigate();
-  const { userStore } = useContext(StoreContext);
+  const { usuarioStore } = useContext(StoreContext);
 
   const [nome, setNome] = useState("");
   const [renda, setRenda] = useState("");
@@ -28,7 +28,7 @@ const Cadastro = observer(() => {
 
   const aoSubmeterFormulario = (evento) => {
     evento.preventDefault();
-    userStore.definirDadosUsuario({ nome, renda, objetivoFinanceiro });
+    usuarioStore.definirDadosUsuario({ nome, renda, objetivoFinanceiro });
     navigate("/home");
   };
 

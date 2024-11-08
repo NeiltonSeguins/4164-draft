@@ -13,8 +13,8 @@ const formatador = new Intl.NumberFormat("pt-BR", {
 });
 
 const OrcamentoDiario = observer(() => {
-  const { userStore } = useContext(StoreContext);
-  const orcamentoDiario = userStore.orcamentoDiario;
+  const { usuarioStore } = useContext(StoreContext);
+  const orcamentoDiario = usuarioStore.orcamentoDiario;
 
   return (
     <Cartao>

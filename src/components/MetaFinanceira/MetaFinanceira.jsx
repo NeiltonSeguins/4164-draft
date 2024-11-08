@@ -17,7 +17,7 @@ export const TituloMetaFinanceira = styled.p`
 `;
 
 const MetaFinanceira = () => {
-  const { userStore } = useContext(StoreContext);
+  const { usuarioStore } = useContext(StoreContext);
   return (
     <Cartao>
       <CartaoCabecalho>Progresso da meta financeira</CartaoCabecalho>
@@ -25,7 +25,7 @@ const MetaFinanceira = () => {
         <Descricao>
           <TituloMetaFinanceira>
             <PigIcon />
-            {userStore.objetivoFinanceiroAtual}
+            {usuarioStore.objetivoFinanceiroAtual}
           </TituloMetaFinanceira>
           <BarraProgresso />
         </Descricao>

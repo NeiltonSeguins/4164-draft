@@ -17,10 +17,10 @@ export const Usuario = styled.div`
 `;
 
 const SaudacaoUsuario = observer(() => {
-  const { userStore } = useContext(StoreContext);
+  const { usuarioStore } = useContext(StoreContext);
   return (
     <Usuario>
-      <h1>Olá, {userStore.nome}</h1>
+      <h1>Olá, {usuarioStore.nome}</h1>
       <p>Veja como estão suas finanças hoje.</p>
     </Usuario>
   );

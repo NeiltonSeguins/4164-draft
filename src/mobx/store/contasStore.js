@@ -1,7 +1,7 @@
 import { autorun, makeAutoObservable } from "mobx";
 import { v4 as uuidv4 } from "uuid";
 
-class AccountStore {
+class ContasStore {
   contas = [];
 
   constructor() {
@@ -25,4 +25,4 @@ class AccountStore {
   }
 }
 
-export const contasStore = new AccountStore();
+export const contasStore = new ContasStore();

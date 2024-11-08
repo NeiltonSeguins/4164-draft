@@ -34,8 +34,8 @@ export const TextoProgresso = styled.div`
 `;
 
 const BarraProgresso = observer(() => {
-  const { userStore } = useContext(StoreContext);
-  const progressoMeta = userStore.progressoMeta;
+  const { usuarioStore } = useContext(StoreContext);
+  const progressoMeta = usuarioStore.progressoMeta;
 
   return (
     <BarraContainer>
