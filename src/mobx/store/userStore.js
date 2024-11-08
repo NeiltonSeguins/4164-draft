@@ -5,6 +5,11 @@ class UserStore {
   renda = 0;
   objetivoFinanceiro = "";
   orcamentoDiario = 0;
+  objetivosTipos = {
+    economizar: "Economizar",
+    investir: "Investir",
+    "controlar-gastos": "Controlar gastos",
+  };
 
   constructor() {
     makeAutoObservable(this);
@@ -44,6 +49,10 @@ class UserStore {
 
   atualizarOrcamentoComSaldo(saldo) {
     this.orcamentoDiario += parseFloat(saldo);
+  }
+
+  get objetivoFinanceiroAtual() {
+    return this.objetivosTipos[this.objetivoFinanceiro] || "";
   }
 
   get progressoMeta() {
