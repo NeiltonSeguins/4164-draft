@@ -10,7 +10,7 @@ import { observer } from "mobx-react";
 import { StoreContext } from "src/mobx/store/storeContext";
 
 const TransacaoModal = observer(({ isOpen, onCloseModal }) => {
-  const { transactionStore, userStore } = useContext(StoreContext);
+  const { transacoesStore, usuarioStore } = useContext(StoreContext);
   const [novaTransacao, setNovaTransacao] = useState({
     nome: "",
     valor: 0,
@@ -20,8 +20,8 @@ const TransacaoModal = observer(({ isOpen, onCloseModal }) => {
   });
 
   const aoSubmeterFormModal = () => {
-    transactionStore.adicionarTransacao(novaTransacao);
-    userStore.atualizarOrcamento(novaTransacao);
+    transacoesStore.adicionarTransacao(novaTransacao);
+    usuarioStore.atualizarOrcamento(novaTransacao);
     onCloseModal();
   };
 
