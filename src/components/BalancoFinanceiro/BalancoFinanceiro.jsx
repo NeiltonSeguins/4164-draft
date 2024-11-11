@@ -12,8 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import { useContext } from "react";
-import { StoreContext } from "src/mobx/store/storeContext";
+import { useStoreContext } from "src/mobx/store/storeContext";
 import { observer } from "mobx-react";
 
 ChartJS.register(
@@ -32,7 +31,7 @@ export const AreaChart = styled.div`
 `;
 
 const BalancoFinanceiro = observer(() => {
-  const { transacoesStore } = useContext(StoreContext);
+  const { transacoesStore } = useStoreContext();
   const categoriasAgrupada = transacoesStore.gastosPorCategoria;
   const data = {
     labels: Object.keys(categoriasAgrupada),

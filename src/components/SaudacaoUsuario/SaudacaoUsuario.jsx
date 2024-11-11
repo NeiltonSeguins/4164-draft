@@ -1,6 +1,5 @@
 import { observer } from "mobx-react";
-import { useContext } from "react";
-import { StoreContext } from "src/mobx/store/storeContext";
+import { useStoreContext } from "src/mobx/store/storeContext";
 import styled from "styled-components";
 
 export const Usuario = styled.div`
@@ -17,7 +16,7 @@ export const Usuario = styled.div`
 `;
 
 const SaudacaoUsuario = observer(() => {
-  const { usuarioStore } = useContext(StoreContext);
+  const { usuarioStore } = useStoreContext();
   return (
     <Usuario>
       <h1>Olá, {usuarioStore.nome}</h1>

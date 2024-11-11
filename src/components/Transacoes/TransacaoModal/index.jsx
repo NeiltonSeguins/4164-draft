@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import CampoTexto from "@components/CampoTexto";
 import Fieldset from "@components/Fieldset";
 import Form from "@components/Form";
@@ -7,10 +7,10 @@ import Label from "@components/Label";
 import Modal from "@components/Modal";
 import { SelectGroup, SelectOption } from "@components/Select";
 import { observer } from "mobx-react";
-import { StoreContext } from "src/mobx/store/storeContext";
+import { useStoreContext } from "src/mobx/store/storeContext";
 
 const TransacaoModal = observer(({ isOpen, onCloseModal }) => {
-  const { transacoesStore, usuarioStore } = useContext(StoreContext);
+  const { transacoesStore, usuarioStore } = useStoreContext();
   const [novaTransacao, setNovaTransacao] = useState({
     nome: "",
     valor: 0,

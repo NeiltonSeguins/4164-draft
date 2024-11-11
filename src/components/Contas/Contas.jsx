@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Conta from "./Conta/Conta";
 import styled from "styled-components";
 import CampoTexto from "@components/CampoTexto";
@@ -11,7 +11,7 @@ import Fieldset from "@components/Fieldset";
 import { WalletIcon } from "@components/Icones";
 import CartaoCorpo from "@components/Cartao/CartaoCorpo/CartaoCorpo";
 import { observer } from "mobx-react";
-import { StoreContext } from "src/mobx/store/storeContext";
+import { StoreContext, useStoreContext } from "src/mobx/store/storeContext";
 
 export const Container = styled(CartaoCorpo)`
   padding: var(--padding-l) var(--padding-m);
@@ -39,7 +39,7 @@ export const ListaMovimentacoes = styled.ul`
 `;
 
 const Contas = observer(() => {
-  const { contasStore, usuarioStore } = useContext(StoreContext);
+  const { contasStore, usuarioStore } = useStoreContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [novaConta, setNovaConta] = useState({
     banco: "",

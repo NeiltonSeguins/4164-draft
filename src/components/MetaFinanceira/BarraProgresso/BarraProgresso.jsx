@@ -1,6 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useContext } from "react";
-import { StoreContext } from "src/mobx/store/storeContext";
+import { useStoreContext } from "src/mobx/store/storeContext";
 import styled from "styled-components";
 
 export const BarraContainer = styled.div`
@@ -34,7 +33,7 @@ export const TextoProgresso = styled.div`
 `;
 
 const BarraProgresso = observer(() => {
-  const { usuarioStore } = useContext(StoreContext);
+  const { usuarioStore } = useStoreContext();
   const progressoMeta = usuarioStore.progressoMeta;
 
   return (

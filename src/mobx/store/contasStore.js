@@ -16,7 +16,11 @@ class ContasStore {
   carregarDoLocalStorage() {
     const dados = localStorage.getItem("contas");
     if (dados) {
-      this.contas = JSON.parse(dados);
+      try {
+        this.contas = JSON.parse(dados);
+      } catch (error) {
+        console.error("ContasStore :: carregarDoLocalStorage", error);
+      }
     }
   }
 

@@ -1,14 +1,23 @@
 import { makeAutoObservable, autorun, reaction } from "mobx";
 
+const DIAS_DO_MES = 30;
+
 class UsuarioStore {
   nome = "";
   renda = 0;
   objetivoFinanceiro = "";
   orcamentoDiario = 0;
+
   objetivosTipos = {
     economizar: "Economizar",
     investir: "Investir",
     "controlar-gastos": "Controlar gastos",
+  };
+
+  metas = {
+    economizar: 0.2,
+    investir: 0.15,
+    "controlar-gastos": 0.8,
   };
 
   constructor() {
@@ -39,17 +48,16 @@ class UsuarioStore {
   }
 
   calcularOrcamentoDiario() {
-    this.orcamentoDiario = Math.floor(this.renda / 30);
+    this.orcamentoDiario = Math.floor(this.renda / DIAS_DO_MES);
   }
 
   atualizarOrcamento(transacao) {
-    let valor = Math.abs(transacao.valor);
-
+    const valor = Math.abs(transacao.valor);
     if (transacao.tipo !== "receita") {
-      valor = -valor;
+      this.orcamentoDiario -= valor;
+      return;
     }
-
-    this.orcamentoDiario += parseFloat(valor);
+    this.orcamentoDiario += valor;
   }
 
   atualizarOrcamentoComSaldo(saldo) {
@@ -57,34 +65,36 @@ class UsuarioStore {
   }
 
   get objetivoFinanceiroAtual() {
-    return this.objetivosTipos[this.objetivoFinanceiro] || "";
+    if (!this.objetivosTipos[this.objetivoFinanceiro]) {
+      return null;
+    }
+    return this.objetivosTipos[this.objetivoFinanceiro];
   }
 
   get progressoMeta() {
-    const metas = {
-      economizar: this.renda * 0.2,
-      investir: this.renda * 0.15,
-      "controlar-gastos": this.renda * 0.8,
-    };
-
-    const meta = metas[this.objetivoFinanceiro] || 0;
-
-    if (this.objetivoFinanceiro === "controlar-gastos") {
-      return meta ? ((meta - this.orcamentoDiario) / meta) * 100 : 0;
+    if (!this.metas[this.objetivoFinanceiro]) {
+      return 0;
     }
-
-    return meta ? (this.orcamentoDiario / meta) * 100 : 0;
+    const meta = this.renda * this.metas[this.objetivoFinanceiro];
+    if (this.objetivoFinanceiro === "controlar-gastos") {
+      return (((meta - this.orcamentoDiario) / meta) * 100).toFixed(2);
+    }
+    return ((this.orcamentoDiario / meta) * 100).toFixed(2);
   }
 
   carregarDoLocalStorage() {
     const dados = localStorage.getItem("usuario");
     if (dados) {
-      const { nome, renda, objetivoFinanceiro, orcamentoDiario } =
-        JSON.parse(dados);
-      this.nome = nome;
-      this.renda = renda;
-      this.objetivoFinanceiro = objetivoFinanceiro;
-      this.orcamentoDiario = orcamentoDiario;
+      try {
+        const { nome, renda, objetivoFinanceiro, orcamentoDiario } =
+          JSON.parse(dados);
+        this.nome = nome;
+        this.renda = renda;
+        this.objetivoFinanceiro = objetivoFinanceiro;
+        this.orcamentoDiario = orcamentoDiario;
+      } catch (error) {
+        console.error("UsuarioStore :: carregarDoLocalStorage", error);
+      }
     }
   }
 }

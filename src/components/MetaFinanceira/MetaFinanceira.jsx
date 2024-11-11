@@ -3,8 +3,7 @@ import { Cartao, CartaoCabecalho, Descricao } from "@components/Cartao";
 import { CartaoCorpo } from "@components/Cartao";
 import { PigIcon } from "@components/Icones";
 import BarraProgresso from "@components/MetaFinanceira/BarraProgresso/BarraProgresso";
-import { useContext } from "react";
-import { StoreContext } from "src/mobx/store/storeContext";
+import { useStoreContext } from "src/mobx/store/storeContext";
 
 export const TituloMetaFinanceira = styled.p`
   display: flex;
@@ -17,7 +16,7 @@ export const TituloMetaFinanceira = styled.p`
 `;
 
 const MetaFinanceira = () => {
-  const { usuarioStore } = useContext(StoreContext);
+  const { usuarioStore } = useStoreContext();
   return (
     <Cartao>
       <CartaoCabecalho>Progresso da meta financeira</CartaoCabecalho>
