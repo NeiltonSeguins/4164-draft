@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   Section,
   Container,
@@ -16,11 +16,11 @@ import Form from "@components/Form/Form";
 import ilustracao from "@assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
-import { StoreContext } from "src/mobx/store/storeContext.jsx";
+import { useStoreContext } from "src/mobx/store/storeContext.jsx";
 
 const Cadastro = observer(() => {
   const navigate = useNavigate();
-  const { usuarioStore } = useContext(StoreContext);
+  const { usuarioStore } = useStoreContext();
 
   const [nome, setNome] = useState("");
   const [renda, setRenda] = useState("");
